@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c372418f-e42c-4acf-812f-2c86fc38b1f7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ports.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.js" afterPath="$PROJECT_DIR$/app/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/src/script/library/modernizr.js" afterPath="$PROJECT_DIR$/app/templates/src/script/library/modernizr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="generator-makeshift.iws" />
@@ -341,7 +337,11 @@
       <created>1391709339855</created>
       <updated>1391709339855</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="app index js, ports.json, modernizr">
+      <created>1391710358399</created>
+      <updated>1391710358399</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -400,13 +400,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
     <MESSAGE value="first commit&#10;" />
     <MESSAGE value="include des and gen folders" />
     <MESSAGE value="include des and gen folders&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="include des and gen folders&#10;" />
+    <MESSAGE value="app index js, ports.json, modernizr" />
+    <option name="LAST_COMMIT_MESSAGE" value="app index js, ports.json, modernizr" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
