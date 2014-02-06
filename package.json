@@ -1,15 +1,15 @@
 {
   "name": "generator-makeshift",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A generator for Yeoman",
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator", "makeshift"
   ],
   "homepage": "https://github.com/tunderdomb/generator-makeshift",
   "bugs": "https://github.com/tunderdomb/generator-makeshift/issues",
   "author": {
-    "name": "",
-    "email": "",
+    "name": "tunderdomb",
+    "email": "tunderdomb@gmail.com",
     "url": "https://github.com/tunderdomb"
   },
   "main": "app/index.js",

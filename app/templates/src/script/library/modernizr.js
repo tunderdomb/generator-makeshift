@@ -451,7 +451,7 @@ window.Modernizr = (function( window, document, undefined ) {
   tests['touch'] = function() {
     var bool;
 
-    if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+    if(('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch) {
       bool = true;
     } else {
       injectElementWithStyles(['@media (',prefixes.join('touch-enabled),('),mod,')','{#modernizr{top:9px;position:absolute}}'].join(''), function( node ) {
