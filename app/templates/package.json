@@ -1,0 +1,32 @@
+{
+  "name": "<%=projectName%>",
+  "version": "0.0.0",
+  "description": "<%=projectDescription%>",
+  "repository": {
+    "type": "git",
+    "url": "<%=gitRepo%>"
+  },
+  "author": {
+    "name": "<%=authorName%>",
+    "email": "<%=authorEmail%>",
+    "url": ""
+  },
+  "license": "<%=projectLicence%>",
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-connect": "latest",
+    "grunt-contrib-imagemin": "latest",
+    "grunt-autoprefixer": "latest",
+    "grunt-modernizr": "latest",
+    "grunt-newer": "latest",
+    "grunt-premailer": "latest",
+    "grunt-nodemailer": "latest",
+    "load-grunt-tasks": "latest",
+    "mustache": "latest"
+  }
+}
