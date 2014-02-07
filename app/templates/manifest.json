@@ -1,0 +1,45 @@
+{
+  "package.json": {
+    "name": "Undefined",
+    "version": "0.1.0",
+    "description": "No description",
+    "repository": {
+      "type": "git",
+      "url": ""
+    },
+    "author": {
+      "name": "",
+      "email": "",
+      "url": ""
+    },
+    "license": "MIT",
+    "devDependencies": {
+      "grunt": "latest",
+      "grunt-contrib-copy": "latest",
+      "grunt-contrib-uglify": "latest",
+      "grunt-contrib-watch": "latest",
+      "grunt-contrib-clean": "latest",
+      "grunt-contrib-less": "latest",
+      "grunt-contrib-connect": "latest",
+      "grunt-contrib-imagemin": "latest",
+      "grunt-autoprefixer": "latest",
+      "grunt-modernizr": "latest",
+      "grunt-newer": "latest",
+      "grunt-premailer": "latest",
+      "grunt-nodemailer": "latest",
+      "load-grunt-tasks": "latest",
+      "mustache": "latest"
+    }
+  },
+
+  "scripts": {
+    "globals": [],
+    "packages": {}
+  },
+
+  "mail": {
+
+  },
+
+  "routes": {}
+}

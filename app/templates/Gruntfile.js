@@ -3,7 +3,7 @@ module.exports = function ( grunt ){
   /*
   * load build config
   * */
-  grunt.mailsettings = grunt.file.readJSON("<%=mailsettingsPath%>")
+  grunt.manifest = grunt.file.readJSON("manifest.json")
 
   /*
    * init config
@@ -11,7 +11,7 @@ module.exports = function ( grunt ){
   grunt.initConfig({
     clean: {
       build: {
-        src: "<%=routemap.root.dest%>**/*"
+        src: "<%=routes.root.dest%>**/*"
       },
       gen: {
         src: [

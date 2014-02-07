@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{config.lang}}">
+<html lang="{{global.lang}}">
 <head>
-  <meta lang="{{config.lang}}" />
+  <meta lang="{{global.lang}}" />
   <meta charset="utf-8">
 
   {{> head/skype}}
@@ -12,6 +12,9 @@
   {{> head/favicon}}
 
   <title></title>
+
+  <script type="text/javascript" src="<%=routes.library.srcUrl%>modernizr.js"></script>
+  <script type="text/javascript" src="<%=routes.script.srcUrl%>polyfill.js"></script>
 
 </head>
 <body>

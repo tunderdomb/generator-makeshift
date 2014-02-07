@@ -29,6 +29,7 @@ module.exports = function ( grunt ){
     }
     layout += ".mustache"
     grunt.copyLayout("<%=gen.page%>", "<%=res.pages%>", layout, pageName)
+    grunt.task.run("render")
     console.log("Generated page '<%=res.pages%>"+pageName+"'")
   })
 
@@ -42,8 +43,8 @@ module.exports = function ( grunt ){
       layout = "default"
     }
     layout += ".js"
-    grunt.copyLayout("<%=gen.script%>", "<%=routemap.script.src%>", layout, scriptName)
-    console.log("Generated script '<%=routemap.script.src%>"+scriptName+"'")
+    grunt.copyLayout("<%=gen.script%>", "<%=routes.script.src%>", layout, scriptName)
+    console.log("Generated script '<%=routes.script.src%>"+scriptName+"'")
   })
 
   /*
@@ -57,7 +58,18 @@ module.exports = function ( grunt ){
     }
     layout += ".mustache"
     grunt.copyLayout("<%=gen.mail%>", "mail/"+mailDirName+"/", layout, "index")
+    grunt.task.run("render")
     console.log("Generated mail 'mail/"+mailDirName+"'")
+  })
+
+  /*
+  * makeless
+  * */
+  grunt.registerTask("makeless", "", function( name ){
+    if ( !name ) throw new Error("Missing style name")
+    grunt.copyLayout("gen/less.less", "<%=res.style%>", "less.less", name)
+    grunt.task.run("style")
+    console.log("Generated style '<%=res.style%>"+name+"'")
   })
 
 };

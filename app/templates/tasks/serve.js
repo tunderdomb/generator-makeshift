@@ -5,7 +5,7 @@ module.exports = function ( grunt ){
       options: {
         port: '<%=ports.dev%>',
         hostname: "*",
-        base: "<%=routemap.root.src%>",
+        base: "<%=routes.root.src%>",
 //        keepalive: true,
         livereload: parseInt('<%=ports.livereload%>'),
         open: "http://<%=localIp%>:<%=ports.dev%>"
@@ -15,7 +15,7 @@ module.exports = function ( grunt ){
       options: {
         port: '<%=ports.pub%>',
         hostname: "*",
-        base: "<%=routemap.root.dest%>",
+        base: "<%=routes.root.dest%>",
         keepalive: true,
         open: "http://<%=localIp%>:<%=ports.pub%>"
       }
@@ -37,6 +37,7 @@ module.exports = function ( grunt ){
       interrupt: true
     },
     templates: {
+      options: {livereload: parseInt('<%=ports.livereload%>')},
       files: [
         "<%=res.pages%>*.{html,mustache}",
         "<%=res.partials%>**/*.{html,mustache}",
@@ -45,25 +46,34 @@ module.exports = function ( grunt ){
       ],
       tasks: ["render"]
     },
+    pluck: {
+      files: [
+        "<%=res.pages%>*.{html,mustache}",
+        "<%=res.partials%>**/*.{html,mustache}",
+        "<%=routes.template.src%>*.{html,mustache}"
+      ],
+      tasks: ["newer:pluck"]
+    },
     modernizr: {
       files: [
-        "<%=routemap.script.src%>**/*.js",
-        "!<%=routemap.script.src%>{library|plugin|polyfill|module}/**/*"
+        "<%=routes.script.src%>**/*.js",
+        "!<%=routes.script.src%>{library|plugin|polyfill|module}/**/*"
       ],
       tasks: ["modernizr"]
     },
     style: {
+      options: {livereload: parseInt('<%=ports.livereload%>')},
       files: ["<%=res.style%>**/*.less"],
-      tasks: ["less:dev", "newer:autoprefixer"]
+      tasks: ["style"]
     },
     livereload: {
       options: {livereload: parseInt('<%=ports.livereload%>')},
       files: [
-        "<%=routemap.root.src%>*.html",
-        "<%=routemap.image.src%>**/*.{jpg,jpeg,png,gif,svg}",
-        "<%=routemap.css.src%>**/*.css",
-        "<%=routemap.font.src%>**/*.{eot,svg,woff,ttf}",
-        "<%=routemap.script.src%>**/*.js"
+//        "<%=routes.root.src%>*.html",
+        "<%=routes.image.src%>**/*.{jpg,jpeg,png,gif,svg}",
+//        "<%=routes.css.src%>**/*.css",
+        "<%=routes.font.src%>**/*.{eot,svg,woff,ttf}",
+        "<%=routes.script.src%>**/*.js"
       ]
     }
   })
@@ -82,7 +92,7 @@ module.exports = function ( grunt ){
       "**/*.less",
       "!import/**/*"
     ],
-    dest: "<%=gen.css%>",
+    dest: "<%=routes.css.src%>",
     ext: ".css"
   })
 
@@ -102,9 +112,25 @@ module.exports = function ( grunt ){
       ]
     },
     expand: true,
-    cwd: "<%=gen.css%>",
+    cwd: "<%=routes.css.src%>",
     src: "**/*.css",
-    dest: "<%=routemap.css.src%>"
+    dest: "<%=routes.css.src%>"
+  })
+
+  /*
+  * Runs when template or page is modified
+  * */
+  grunt.config("pluck", {
+    dev: {
+      expand: true,
+      flatten: true,
+      src:[
+        "<%=res.pages%>*.{html,mustache}",
+        "<%=res.partials%>**/*.{html,mustache}",
+        "<%=routes.template.src%>*.{html,mustache}"
+      ],
+      dest: "<%=gen.root%>css/"
+    }
   })
 
   /*
@@ -112,7 +138,7 @@ module.exports = function ( grunt ){
   * */
   grunt.config("render", {
     options: {
-      partials: ["<%=res.partials%>", "<%=routemap.template.src%>"],
+      partials: ["<%=res.partials%>", "<%=routes.template.src%>"],
       data: "<%=res.data%>",
       helpers: "<%=res.helpers%>"
     },
@@ -120,7 +146,7 @@ module.exports = function ( grunt ){
       expand: true,
       flatten: true,
       src: "<%=res.pages%>*.mustache",
-      dest: "<%=routemap.root.src%>",
+      dest: "<%=routes.root.src%>",
       ext: ".html"
     },
     mails: {
@@ -130,6 +156,13 @@ module.exports = function ( grunt ){
     }
   })
 
+  /*
+   * style
+   * */
+  grunt.registerTask("style", "", function(  ){
+    grunt.task.run("less:dev")
+    grunt.task.run("newer:autoprefixer:dev")
+  })
 
   /*
    * serve
@@ -140,6 +173,8 @@ module.exports = function ( grunt ){
       grunt.task.run("watch")
     })
     // open server
+    grunt.task.run("render")
+    grunt.task.run("modernizr")
     grunt.task.run("connect:dev")
   })
 

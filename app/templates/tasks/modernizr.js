@@ -3,10 +3,10 @@ module.exports = function ( grunt ){
   grunt.config("modernizr", {
     build: {
       // [REQUIRED] Path to the build you're using for development.
-      "devFile": "<%=routemap.library%>modernizr.js",
+      "devFile": "<%=routes.library.src%>modernizr-dev.js",
 
       // [REQUIRED] Path to save out the built file.
-      "outputFile": "<%=routemap.library%>modernizr-custom.js",
+      "outputFile": "<%=routes.library.src%>modernizr.js",
 
       // Based on default settings on http://modernizr.com/download/
       "extra": {
@@ -44,17 +44,17 @@ module.exports = function ( grunt ){
       // "files" : {
       "src": [
         // match every user defined script, except libraries, plugins, or polyfills
-        "<%=routemap.script.src%>**/*.js",
-        "!<%=routemap.script.src%>{library|plugin|polyfill|module}/**/*"
+        "<%=routes.script.src%>**/*.js",
+        "!<%=routes.script.src%>{library|plugin|polyfill|module}/**/*"
       ]
     },
 
     // When parseFiles = true, matchCommunityTests = true will attempt to
     // match user-contributed tests.
-    "matchCommunityTests": false,
+//    "matchCommunityTests": false,
 
     // Have custom Modernizr tests? Add paths to their location here.
-    "customTests": []
+//    "customTests": []
   })
 
 };

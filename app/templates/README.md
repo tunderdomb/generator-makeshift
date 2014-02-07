@@ -49,3 +49,8 @@ Look Ma, No hands!
 ## POLYFILLS
 
 [HTML5 Cross Browser Polyfills](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills)
+
+[polyfill.js](https://github.com/kbjr/polyfill.js)
+
+[array-generics](https://github.com/plusdude/array-generics)
+

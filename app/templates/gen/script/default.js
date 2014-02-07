@@ -1,5 +1,8 @@
 (function( f ){
-  f(window, document, {}.undefined)
+  polyfill(function(  ){
+    f(window, document, {}.undefined)
+    window.dispatchEvent(new Event('clientScriptReady'))
+  })
 }(function( win, doc, undefined ){
 
 }));

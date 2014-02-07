@@ -1,0 +1,38 @@
+{
+  "root": {
+    "src": "src/",
+    "dest": "pub/"
+  },
+  "template": {
+    "src": "template/",
+    "dest": "Content/Templates/"
+  },
+  "image": {
+    "src": "media/image/",
+    "dest": "Content/Images/"
+  },
+  "audio": {
+    "src": "media/audio/",
+    "dest": "Content/Audio"
+  },
+  "video": {
+    "src": "media/video/",
+    "dest": "Content/Video"
+  },
+  "script": {
+    "src": "script/",
+    "dest": "Scripts"
+  },
+  "css": {
+    "src": "static/css/",
+    "dest": "Content/"
+  },
+  "font": {
+    "src": "static/font/",
+    "dest": "Content/Fonts"
+  },
+  "favicon": {
+    "src": "static/favicon/",
+    "dest": "Content/FavIcons"
+  }
+}

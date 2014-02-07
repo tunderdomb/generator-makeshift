@@ -26,7 +26,7 @@ module.exports = function ( grunt ){
 
   function getData( dataPathPattern ){
     var data = {}
-    console.log("Collecting data from '"+dataPathPattern+"'")
+//    console.log("Collecting data from '"+dataPathPattern+"'")
     dataPathPattern = path.normalize(dataPathPattern+"/*.json")
     grunt.file.expand(dataPathPattern).forEach(function( dataPath ){
       try{
@@ -49,7 +49,7 @@ module.exports = function ( grunt ){
   }
 
   function registerHelpers( helpersDir, context ){
-    console.log("Registering helpers from '"+helpersDir+"'")
+//    console.log("Registering helpers from '"+helpersDir+"'")
     grunt.file.expand(helpersDir+"**/*.js").forEach(function( helper ){
       helper = path.resolve(helper)
       try{

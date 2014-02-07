@@ -21,30 +21,30 @@ module.exports = function ( grunt ){
 
   function replaceScriptUrl( content ){
     return content
-      .replace(new RegExp('"<%=routemap.script.srcUrl%>(.+?.js)"', 'g'), function( match, src ){
+      .replace(new RegExp('"<%=routes.script.srcUrl%>(.+?.js)"', 'g'), function( match, src ){
         reference(match)
-        return "<%=routemap.script.destUrl%>"+src
+        return "<%=routes.script.destUrl%>"+src
       })
-      .replace(new RegExp('"<%=routemap.library.srcUrl%>(.+?.js)"', 'g'), function( match, src ){
+      .replace(new RegExp('"<%=routes.library.srcUrl%>(.+?.js)"', 'g'), function( match, src ){
         reference(match)
-        return "<%=routemap.library.destUrl%>"+src
+        return "<%=routes.library.destUrl%>"+src
       })
-      .replace(new RegExp('"<%=routemap.plugin.srcUrl%>(.+?.js)"', 'g'), function( match, src ){
+      .replace(new RegExp('"<%=routes.plugin.srcUrl%>(.+?.js)"', 'g'), function( match, src ){
         reference(match)
-        return "<%=routemap.plugin.destUrl%>"+src
+        return "<%=routes.plugin.destUrl%>"+src
       })
-      .replace(new RegExp('"<%=routemap.polyfill.srcUrl%>(.+?.js)"', 'g'), function( match, src ){
+      .replace(new RegExp('"<%=routes.polyfill.srcUrl%>(.+?.js)"', 'g'), function( match, src ){
         reference(match)
-        return "<%=routemap.polyfill.destUrl%>"+src
+        return "<%=routes.polyfill.destUrl%>"+src
       })
   }
 
   function reference( src ){
-    src = src.replace(new RegExp("^<%=routemap.root.src%>".replace(/(\/+|\\+)$/, "")), "/").replace(/[\/\\]+/g, "/")
+    src = src.replace(new RegExp("^<%=routes.root.src%>".replace(/(\/+|\\+)$/, "")), "/").replace(/[\/\\]+/g, "/")
     reference[src] = true
   }
   function isReferenced( src ){
-    src = src.replace(new RegExp("^<%=routemap.root.src%>".replace(/(\/+|\\+)$/, "")), "/").replace(/[\/\\]+/g, "/")
+    src = src.replace(new RegExp("^<%=routes.root.src%>".replace(/(\/+|\\+)$/, "")), "/").replace(/[\/\\]+/g, "/")
     console.log(!!reference[src] ? "" : "Unreferenced "+src)
     return !!reference[src]
   }
@@ -52,15 +52,15 @@ module.exports = function ( grunt ){
   // HTML
   grunt.config("copy.html", {
     expand: true,
-    cwd: "<%=routemap.root.src%>",
+    cwd: "<%=routes.root.src%>",
     src: "*.html",
-    dest: "<%=routemap.root.dest%>",
+    dest: "<%=routes.root.dest%>",
     options: {process: function( content ){
-      content = replaceAttribute(content, "script", "src", "<%=routemap.script.srcUrl%>", "<%=routemap.script.destUrl%>")
-      content = replaceAttribute(content, "link", "href", "<%=routemap.css.srcUrl%>", "<%=routemap.css.destUrl%>")
-      content = replaceAttribute(content, "img", "src", "<%=routemap.image.srcUrl%>", "<%=routemap.image.destUrl%>")
-      content = rewriteCssUrl(content, "<%=routemap.image.srcUrl%>", "<%=routemap.image.destUrl%>")
-      content = rewriteCssUrl(content, "<%=routemap.font.srcUrl%>", "<%=routemap.font.destUrl%>")
+      content = replaceAttribute(content, "script", "src", "<%=routes.script.srcUrl%>", "<%=routes.script.destUrl%>")
+      content = replaceAttribute(content, "link", "href", "<%=routes.css.srcUrl%>", "<%=routes.css.destUrl%>")
+      content = replaceAttribute(content, "img", "src", "<%=routes.image.srcUrl%>", "<%=routes.image.destUrl%>")
+      content = rewriteCssUrl(content, "<%=routes.image.srcUrl%>", "<%=routes.image.destUrl%>")
+      content = rewriteCssUrl(content, "<%=routes.font.srcUrl%>", "<%=routes.font.destUrl%>")
       return content
     }}
   })
@@ -68,15 +68,15 @@ module.exports = function ( grunt ){
   // TEMPLATE
   grunt.config("copy.template", {
     expand: true,
-    cwd: "<%=routemap.root.src%>",
+    cwd: "<%=routes.root.src%>",
     src: "*.html",
-    dest: "<%=routemap.template.dest%>",
+    dest: "<%=routes.template.dest%>",
     options: {process: function( content ){
-      content = replaceAttribute(content, "script", "src", "<%=routemap.script.srcUrl%>", "<%=routemap.script.destUrl%>")
-      content = replaceAttribute(content, "link", "href", "<%=routemap.css.srcUrl%>", "<%=routemap.css.destUrl%>")
-      content = replaceAttribute(content, "img", "src", "<%=routemap.image.srcUrl%>", "<%=routemap.image.destUrl%>")
-      content = rewriteCssUrl(content, "<%=routemap.image.srcUrl%>", "<%=routemap.image.destUrl%>")
-      content = rewriteCssUrl(content, "<%=routemap.font.srcUrl%>", "<%=routemap.font.destUrl%>")
+      content = replaceAttribute(content, "script", "src", "<%=routes.script.srcUrl%>", "<%=routes.script.destUrl%>")
+      content = replaceAttribute(content, "link", "href", "<%=routes.css.srcUrl%>", "<%=routes.css.destUrl%>")
+      content = replaceAttribute(content, "img", "src", "<%=routes.image.srcUrl%>", "<%=routes.image.destUrl%>")
+      content = rewriteCssUrl(content, "<%=routes.image.srcUrl%>", "<%=routes.image.destUrl%>")
+      content = rewriteCssUrl(content, "<%=routes.font.srcUrl%>", "<%=routes.font.destUrl%>")
       return content
     }}
   })
@@ -84,15 +84,15 @@ module.exports = function ( grunt ){
   // CSS
   grunt.config("copy.css", {
     expand: true,
-    cwd: "<%=routemap.css.src%>",
+    cwd: "<%=routes.css.src%>",
     src: "**/*.css",
-    dest: "<%=routemap.css.dest%>",
+    dest: "<%=routes.css.dest%>",
     filter: function( src ){
       return isReferenced(src)
     },
     options: {process: function( content ){
-      content = rewriteCssUrl(content, "<%=routemap.image.srcUrl%>", "<%=routemap.image.destUrl%>")
-      content = rewriteCssUrl(content, "<%=routemap.font.srcUrl%>", "<%=routemap.font.destUrl%>")
+      content = rewriteCssUrl(content, "<%=routes.image.srcUrl%>", "<%=routes.image.destUrl%>")
+      content = rewriteCssUrl(content, "<%=routes.font.srcUrl%>", "<%=routes.font.destUrl%>")
       return content
     }}
   })
@@ -103,9 +103,9 @@ module.exports = function ( grunt ){
     filter: function( src ){
       return isReferenced(src)
     },
-    cwd: "<%=routemap.font.src%>",
+    cwd: "<%=routes.font.src%>",
     src: "**/*.{eot,svg,woff,ttf}",
-    dest: "<%=routemap.font.dest%>"
+    dest: "<%=routes.font.dest%>"
   })
 
   // IMAGE
@@ -114,9 +114,9 @@ module.exports = function ( grunt ){
     filter: function( src ){
       return isReferenced(src)
     },
-    cwd: "<%=routemap.image.src%>",
+    cwd: "<%=routes.image.src%>",
     src: "*.{jpg,jpeg,png,gif}",
-    dest: "<%=routemap.image.dest%>"
+    dest: "<%=routes.image.dest%>"
   })
 
   // AUDIO
@@ -125,9 +125,9 @@ module.exports = function ( grunt ){
     filter: function( src ){
       return isReferenced(src)
     },
-    cwd: "<%=routemap.audio.src%>",
+    cwd: "<%=routes.audio.src%>",
     src: "**/*",
-    dest: "<%=routemap.audio.dest%>"
+    dest: "<%=routes.audio.dest%>"
   })
 
   // VIDEO
@@ -136,9 +136,9 @@ module.exports = function ( grunt ){
     filter: function( src ){
       return isReferenced(src)
     },
-    cwd: "<%=routemap.video.src%>",
+    cwd: "<%=routes.video.src%>",
     src: "**/*",
-    dest: "<%=routemap.video.dest%>"
+    dest: "<%=routes.video.dest%>"
   })
 
   // SCRIPT
@@ -148,27 +148,27 @@ module.exports = function ( grunt ){
       filter: function( src ){
         return isReferenced(src)
       },
-      cwd: "<%=routemap.script.src%>",
+      cwd: "<%=routes.script.src%>",
       src: [
         "**/*.js",
         "!library/**/*",
         "!plugin/**/*",
         "!polyfill/**/*"
       ],
-      dest: "<%=routemap.script.dest%>",
+      dest: "<%=routes.script.dest%>",
       options: {process: replaceScriptUrl}
     }, {
       expand: true,
       filter: function( src ){
         return isReferenced(src)
       },
-      cwd: "<%=routemap.script.src%>",
+      cwd: "<%=routes.script.src%>",
       src: [
         "library/**/*",
         "plugin/**/*",
         "polyfill/**/*"
       ],
-      dest: "<%=routemap.script.dest%>"
+      dest: "<%=routes.script.dest%>"
     }]
   })
 
@@ -179,9 +179,9 @@ module.exports = function ( grunt ){
 
       },
       expand: true,
-      cwd: "<%=routemap.image.src%>",
+      cwd: "<%=routes.image.src%>",
       src: "**/*.{png,jpg,jpeg,gif,svg}",
-      dest: "<%=routemap.image.dest%>"
+      dest: "<%=routes.image.dest%>"
     }
   })
 
@@ -196,28 +196,28 @@ module.exports = function ( grunt ){
       }
     },
     expand: true,
-    cwd: "<%=routemap.script.dest%>",
+    cwd: "<%=routes.script.dest%>",
     src: [
       "**/*.js",
       "!library/**/*",
       "!plugin/**/*",
       "!polyfill/**/*"
     ],
-    dest: "<%=routemap.script.dest%>"
+    dest: "<%=routes.script.dest%>"
   })
 
   /*
    * build
    * */
   grunt.registerTask("build", "", function(  ){
-    grunt.task.run("copy:html")
-    grunt.task.run("copy:css")
-    grunt.task.run("copy:image")
-    grunt.task.run("copy:audio")
-    grunt.task.run("copy:video")
-    grunt.task.run("copy:script")
-    grunt.task.run("imagemin")
-    grunt.task.run("uglify:build")
+    grunt.task.run("newer:copy:html")
+    grunt.task.run("newer:copy:css")
+    grunt.task.run("newer:copy:image")
+    grunt.task.run("newer:copy:audio")
+    grunt.task.run("newer:copy:video")
+    grunt.task.run("newer:copy:script")
+    grunt.task.run("newer:imagemin")
+//    grunt.task.run("uglify:build")
   })
 
 };
